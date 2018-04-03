@@ -1,0 +1,42 @@
+{% extends '../base.html' %}
+
+{% block container %}
+<form method='POST' action='/user/register/' enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    {% if error %}
+        <div>
+            错误：{{ error }}
+        </div>
+        <hr>
+    {% endif %}
+    <div>
+        <label>昵称</label>
+        <input name='nickname' type='text' value='{{ nickname }}'>
+    </div>
+    <div>
+        <label>密码</label>
+        <input name='password' type='password' value='{{ password }}'>
+    </div>
+    <div>
+        <label>确认密码</label>
+        <input name='password2' type='password' value='{{ password2 }}'>
+    </div>
+    <div>
+        <label>头像</label>
+        <input name='icon' type='file' value='{{ icon }}'>
+    </div>
+    <div>
+        <label>年龄</label>
+        <input name='age' type='text' value='{{ age }}'>
+    </div>
+    <div>
+        <label>性别</label>
+        <input name='sex' type='text' value='{{ sex }}'>
+    </div>
+
+    <div>
+        <button type="submit">提交</button>
+    </div>
+</form>
+{% endblock %}

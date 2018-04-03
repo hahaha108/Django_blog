@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang='zh-CN'>
+    <head>
+        <meta charset='utf-8'>
+        <title>demo</title>
+    </head>
+    <body>
+        {% load static %}
+        <!-- 页眉 -->
+        <div class='navbar'>
+            {% block navbar %}{% endblock %}
+        </div>
+        <!-- 正文 -->
+        <div class='container'>
+            {% block container %}{% endblock %}
+        </div>
+        <!-- 页脚 -->
+        <div class='footer'>
+            {% block footer %}{% endblock %}
+        </div>
+    </body>
+</html>
