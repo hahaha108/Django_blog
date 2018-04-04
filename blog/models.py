@@ -28,9 +28,9 @@ class Post(models.Model):
     modified_time = models.DateTimeField(auto_now=True)
 
     excerpt = models.CharField(max_length=300,null=True,blank=True)
-    category = models.ForeignKey('Category')
+    category = models.ForeignKey('Category',None)
     tags = models.ManyToManyField('Tag')
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User,None)
     views = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -40,7 +40,9 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:detail',kwargs={'pk':self.pk})
+        # return reverse('blog:detail',kwargs={'pk':self.pk})
+
+        return reverse('blog:detail')
 
     def increase_views(self):
         self.views += 1
@@ -55,5 +57,5 @@ class Post(models.Model):
                     'markdown.extensions.toc'
                 ]
             )
-            self.excerpt = strip_tags(mk.convert(self.body))[:54]
+            self.excerpt = strip_tags(mk.convert(self.body))[:78]
         super(Post, self).save(*args,**kwargs)

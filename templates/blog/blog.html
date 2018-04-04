@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+        <div class="gallery-head">
+            <h5>Blog</h5>
+            <p>But I must explain to you how all this mistaken idea of denouncing  pleasure and praising pain was born.</p>
+        </div>
+    <div class="blog">
+    {% for post in post_list %}
+					<div class="blog-grid">
+						<div class="col-xs-4 blog-grid-left">
+							<a href="{{ post.get_absolute_url }}"><img src="{{ post.titleimg.url }}" alt=" " class="img-responsive"></a>
+						</div>
+						<div class="col-xs-8 blog-grid-right">
+							<h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+							<p>{{ post.excerpt }}</p>
+							<a href="{{ post.get_absolute_url }}"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+    {% endfor %}
+    </div>
+
+        {% if is_paginated %}
+        <div class="pagination-simple">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+            {% endif %}
+
+            {% for i in page_range %}
+                {% if page_obj.number == i %}
+                    <a style="color:red;font-size:26px;padding: 5px" href="?page={{ i }}">{{ i }}</a>
+                {% else %}
+                    <a style="padding: 5px" href="?page={{ i }}">{{ i }}</a>
+                {% endif %}
+
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
