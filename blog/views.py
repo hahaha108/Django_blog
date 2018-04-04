@@ -7,10 +7,10 @@ import utils
 
 def index(request):
     tpl_name = 'index.html'
-    return render(request,tpl_name)
+    return render(request,tpl_name,context={'page_table':'index'})
 
 def detail(request):
-    pass
+    return render(request,'blog/detail.html')
 
 class blog(ListView):
     model = Post
@@ -25,7 +25,8 @@ class blog(ListView):
         start,end = utils.custompaginator(paginator.num_pages,page.number, 3)
         context.update(
             {
-                'page_range' : range(start,end + 1)
+                'page_range' : range(start,end + 1),
+                'page_table':'blog'
             }
         )
         return context

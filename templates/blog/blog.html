@@ -9,10 +9,15 @@
     <div class="blog">
     {% for post in post_list %}
 					<div class="blog-grid">
-						<div class="col-xs-4 blog-grid-left">
+                        {% if post.titleimg %}
+                        <div class="col-xs-4 blog-grid-left">
 							<a href="{{ post.get_absolute_url }}"><img src="{{ post.titleimg.url }}" alt=" " class="img-responsive"></a>
 						</div>
 						<div class="col-xs-8 blog-grid-right">
+                            {% else %}
+                            <div class="col-xs-12 blog-grid-right">
+                        {% endif %}
+
 							<h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
 							<p>{{ post.excerpt }}</p>
 							<a href="{{ post.get_absolute_url }}"><span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span></a>
