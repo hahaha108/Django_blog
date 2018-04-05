@@ -4,42 +4,28 @@
 
 				<!-- single -->
 					<div class="single">
-						<h3>Nulla Quis lorum nisl tempus convallis quis ac lactus</h3>
+						<h3>{{ post.title }}</h3>
                         <div class="single-left">
-							<p>Published on <span>March,2016</span></p>
+							<p>阅读量：<span>{{ post.views }}</span></p>
 						</div>
                         <div class="clearfix"> </div>
 						<p class="tortor">
-                            There are many variations of passages of Lorem Ipsum available,
-							but the majority have suffered alteration in some form, by injected humour,
-							or randomised words which don't look even slightly believable. If you are going
-							to use a passage.Nulla Quis lorum nisl tempus convallis quis ac lactus.Sed porttitorlactus nibh
-							eget tortor risus.Nulla porttitor accumsan tincidunt.</p>
+                            {{ post.body | safe }}</p>
 						<div class="tags-cate">
 							<div class="cat-grid">
-								<h4><span>C</span>ategories</h4>
+								<h4><span>文</span>章类别</h4>
 								<ul>
-									<li><a href="#">Donec rutrum curabitur</a></li>
-									<li><a href="#">Sed porttitorlactus nibh</a></li>
-									<li><a href="#">Curabitur aliquet quam id</a></li>
-									<li><a href="#">Nulla toraccumsan tincidunt</a></li>
-									<li><a href="#">which don't look even</a></li>
-									<li><a href="#">Sed porttitorlactus nibh</a></li>
+                                    <li><a href="#">{{ post.category }}</a></li>
 								</ul>
 							</div>
 							<div class="cat-grid">
-								<h4><span>A</span>rchives</h4>
+								<h4><span>发</span>布时间</h4>
 								<ul>
-									<li><a href="#">January 24,2012.</a></li>
-									<li><a href="#">April 15,2013.</a></li>
-									<li><a href="#">September 24,2014.</a></li>
-									<li><a href="#">May 24,2015.</a></li>
-									<li><a href="#">January 15,2016.</a></li>
-									<li><a href="#">March 24,2016.</a></li>
+                                    <li><a href="#">{{ post.created_time }}</a></li>
 								</ul>
 							</div>
 							<div class="cat-grid">
-								<h4><span>T</span>ags</h4>
+								<h4><span>标</span>签</h4>
 								<div class="top-social-icons">
 										<a href="#">Cards</a>
 										<a href="#">Website</a>

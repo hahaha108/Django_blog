@@ -40,9 +40,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        # return reverse('blog:detail',kwargs={'pk':self.pk})
-
-        return reverse('myblog:detail')
+        return reverse('myblog:detail',kwargs={'pk':self.pk})
 
     def increase_views(self):
         self.views += 1

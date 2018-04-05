@@ -1,5 +1,9 @@
+import markdown
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.utils.text import slugify
+from django.views.generic import ListView,DetailView
+from markdown.extensions.toc import TocExtension
+
 from .models import Post
 import utils
 # Create your views here.
@@ -9,8 +13,29 @@ def index(request):
     tpl_name = 'index.html'
     return render(request,tpl_name,context={'page_table':'index'})
 
-def detail(request):
-    return render(request,'blog/detail.html')
+class detail(DetailView):
+    model = Post
+    template_name = 'blog/detail.html'
+    context_object_name = 'post'
+
+    def get(self,request,*args,**kwargs):
+        response = super().get(request,*args,**kwargs)
+        self.object.increase_views()
+        return response
+
+    def get_object(self, queryset=None):
+        # 调用父类的get_object去获取post对象
+        post = super().get_object(queryset=None)
+        # 将post的body使用markdown处理
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            TocExtension(slugify=slugify)
+        ])
+        post.body = md.convert(post.body)
+        # 返回post对象
+        return post
+
 
 class blog(ListView):
     model = Post
