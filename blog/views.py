@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from django.views.generic import ListView,DetailView
 from markdown.extensions.toc import TocExtension
 
+from comments.forms import CommentForm
 from .models import Post
 import utils
 # Create your views here.
@@ -36,6 +37,20 @@ class detail(DetailView):
         # 返回post对象
         return post
 
+    def get_context_data(self, **kwargs):
+        # 调用父类的get_context_data，获取原始的context对象
+        context = super().get_context_data(**kwargs)
+        post = self.object
+        # 添加额外的上下文对象
+        form = CommentForm()
+        comment_list = post.comment_set.all()
+        # 更新context
+        context.update({
+            'form': form,
+            'comment_list': comment_list
+        })
+        return context
+
 
 class blog(ListView):
     model = Post
@@ -55,3 +70,4 @@ class blog(ListView):
             }
         )
         return context
+

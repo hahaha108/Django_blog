@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'user',
+    'comments',
 ]
 
 MIDDLEWARE = [
@@ -106,9 +107,9 @@ if not DEBUG:
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -116,9 +117,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+AUTH_USER_MODEL = 'user.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+LOGOUT_REDIRECT_URL = '/index/'
+LOGIN_REDIRECT_URL = '/index/'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [

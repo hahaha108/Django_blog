@@ -23,7 +23,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/',include('user.urls')),
+    path('comments/',include('comments.urls')),
     path('',include('blog.urls')),
+    path('user/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

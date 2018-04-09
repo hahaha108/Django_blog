@@ -20,7 +20,7 @@ class Tag(models.Model):
         return self.name
 
 class Post(models.Model):
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=60)
     titleimg = models.ImageField(null=True,blank=True)
     body = models.TextField()
 
@@ -55,5 +55,5 @@ class Post(models.Model):
                     'markdown.extensions.toc'
                 ]
             )
-            self.excerpt = strip_tags(mk.convert(self.body))[:78]
+            self.excerpt = strip_tags(mk.convert(self.body))[:108]
         super(Post, self).save(*args,**kwargs)

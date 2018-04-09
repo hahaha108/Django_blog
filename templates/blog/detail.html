@@ -84,11 +84,11 @@
 						<div class="leave-comment">
 							<h4>Leave your comment</h4>
 							<p>Suspendisse tempor tellus sed nisl semper, quis condimentum turpis pharetra.</p>
-							<form>
-								<input type="text" placeholder="Name" required=" ">
-								<input type="text" placeholder="Email" required=" ">
-								<input type="text" placeholder="Your Website" required=" ">
-								<textarea placeholder="Message" required=" "></textarea>
+							<form action="{% url 'comments:post_comment' post.pk %}" method="post" >
+                                {% csrf_token %}
+								<label for="{{ form.text.id_for_label }}">评论：</label>
+                                {{ form.text }}
+                                {{ form.text.errors }}
 								<input type="submit" value="Submit">
 								<div class="clearfix"> </div>
 							</form>
