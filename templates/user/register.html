@@ -1,42 +1,25 @@
-{% extends '../base.html' %}
+{% extends 'base.html' %}
 
 {% block container %}
-<form method='POST' action='/user/register/' enctype='multipart/form-data'>
-    {% csrf_token %}
-
-    {% if error %}
-        <div>
-            错误：{{ error }}
-        </div>
-        <hr>
-    {% endif %}
-    <div>
-        <label>昵称</label>
-        <input name='nickname' type='text' value='{{ nickname }}'>
-    </div>
-    <div>
-        <label>密码</label>
-        <input name='password' type='password' value='{{ password }}'>
-    </div>
-    <div>
-        <label>确认密码</label>
-        <input name='password2' type='password' value='{{ password2 }}'>
-    </div>
-    <div>
-        <label>头像</label>
-        <input name='icon' type='file' value='{{ icon }}'>
-    </div>
-    <div>
-        <label>年龄</label>
-        <input name='age' type='text' value='{{ age }}'>
-    </div>
-    <div>
-        <label>性别</label>
-        <input name='sex' type='text' value='{{ sex }}'>
-    </div>
-
-    <div>
-        <button type="submit">提交</button>
-    </div>
-</form>
+<h3>注册</h3>
+                <form class="form" action="{% url 'users:register' %}" method="post" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                <ul>
+                    {% for field in form %}
+                        <li>
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                        {% if field.help_text %}
+                            <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                        </li>
+                    {% endfor %}
+                  </ul>
+                    <button type="submit" class="btn btn-primary btn-block">注册</button>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                </form>
+                <div class="flex-center top-gap text-small">
+                    <a href="#">已有账号登录</a>
+                </div>
 {% endblock %}

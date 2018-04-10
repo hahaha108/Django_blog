@@ -59,8 +59,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     {% else %}
                                         <li><a href="{% url 'myblog:bloglist' %}" class="hvr-underline-from-left"><i class="edit1"></i>Blog</a></li>
                                     {% endif %}
-
-									<li><a href="#" class="hvr-underline-from-left"><i class="text-size1"></i>Short Codes</a></li>
+                                    {% if user.is_authenticated %}
+									<li><a href="{% url 'logout' %}" class="hvr-underline-from-left"><i class="text-size1"></i>登出</a></li>
+                                    {% else %}
+                                        <li><a href="{% url 'login' %}" class="hvr-underline-from-left"><i class="text-size1"></i>登录</a></li>
+                                    {% endif %}
 									<li><a href="#" class="hvr-underline-from-left"><i class="envelope1"></i>Mail US</a></li>
 								</ul>
 							</nav>
