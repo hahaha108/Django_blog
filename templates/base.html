@@ -13,6 +13,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //for-mobile-apps -->
 <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    {% block css %}{% endblock %}
 <!-- js -->
 <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 <!-- //js -->
@@ -62,7 +63,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     {% if user.is_authenticated %}
 									<li><a href="{% url 'logout' %}" class="hvr-underline-from-left"><i class="text-size1"></i>登出</a></li>
                                     {% else %}
-                                        <li><a href="{% url 'login' %}" class="hvr-underline-from-left"><i class="text-size1"></i>登录</a></li>
+                                        <li><a href="{% url 'login' %}" class="hvr-underline-from-left"><i class="text-size1"></i>登录/注册</a></li>
                                     {% endif %}
 									<li><a href="#" class="hvr-underline-from-left"><i class="envelope1"></i>Mail US</a></li>
 								</ul>

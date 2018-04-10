@@ -21,8 +21,8 @@ def register_user(request):
             if redirect_to:
                 return redirect(redirect_to)
             else:
-                # 跳转到首页。
-                return redirect(reverse('myblog:index'))
+                # 跳转到登录。
+                return redirect(reverse('login'))
     else:
         form = RegisterForm()
     return render(request, 'user/register.html', {'form':form,'next':redirect_to})

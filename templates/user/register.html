@@ -1,25 +1,36 @@
 {% extends 'base.html' %}
 
+{% block css %}
+    <style>
+    ul li input{outline: none;border: 2px solid #E0BD62;font-size: 14px;margin:1em 0;width: 60%;margin-left: 5px}
+    ul li label{width: 105px}
+    #id_icon{border: 1px solid #FFFFFF;}
+    #tb{margin-top: 30px}
+    #zc{margin-top: 13px;background-color: #f0ad4e;border: 1px solid #FFFFFF;margin-bottom: 10px;width: 170px;height: 50px;font-size: 20px;}
+    </style>
+{% endblock %}
+
 {% block container %}
-<h3>注册</h3>
+<h1>用户注册</h1>
                 <form class="form" action="{% url 'users:register' %}" method="post" enctype="multipart/form-data" >
                     {% csrf_token %}
-                <ul>
+                <ul id="tb">
                     {% for field in form %}
                         <li>
                         {{ field.label_tag }}
                         {{ field }}
                         {{ field.errors }}
-                        {% if field.help_text %}
-                            <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
-                        {% endif %}
+{#                        {% if field.help_text %}#}
+{#                            <p class="help text-small text-muted">{{ field.help_text|safe }}</p>#}
+{#                        {% endif %}#}
                         </li>
                     {% endfor %}
                   </ul>
-                    <button type="submit" class="btn btn-primary btn-block">注册</button>
+                    <button id="zc" type="submit">注册</button>
                     <input type="hidden" name="next" value="{{ next }}"/>
                 </form>
+
                 <div class="flex-center top-gap text-small">
-                    <a href="#">已有账号登录</a>
+                    <a href="{% url 'login' %}">已有账号登录</a>
                 </div>
 {% endblock %}
