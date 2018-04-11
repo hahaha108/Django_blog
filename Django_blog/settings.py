@@ -131,5 +131,7 @@ STATICFILES_DIRS = [
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
 
+VERIFICATION_CODE_IMGS_DIR = os.path.join(os.path.join(BASE_DIR, 'static'),'verify_code')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
