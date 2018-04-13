@@ -60,3 +60,5 @@ def register_user(request):
         form = RegisterForm()
     return render(request, 'user/register.html', {'form':form,'next':redirect_to,'img_path':img_path,'filename':random_filename,'err_msg':err_msg})
 
+def index(request):
+    return render(request,'user/index.html')

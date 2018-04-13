@@ -2,7 +2,7 @@
 {% load static %}
 <html>
 <head>
-<title>Home</title>
+<title>python博客</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,6 +13,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //for-mobile-apps -->
 <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
 <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="shortcut icon" href="{% static 'images/logo.jpg' %}">
     {% block css %}{% endblock %}
 <!-- js -->
 <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
@@ -29,7 +30,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="banner-body-content">
 			<div class="col-xs-3 banner-body-left">
 				<div class="logo">
-					<h1><a href="#">Python<span>Taste</span></a></h1>
+					<h1><a href="#">Python<span>博客</span></a></h1>
 				</div>
 				<div class="top-nav">
 					<nav class="navbar navbar-default">
@@ -47,25 +48,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 							<nav class="stroke">
 								<ul class="nav navbar-nav">
-                                    {% if page_table == 'index' %}
-                                        <li class="active"><a href="{% url 'myblog:index' %}"><i class="home"></i>Home</a></li>
+                                    {% if my_page == 'index' %}
+                                        <li class="active"><a href="{% url 'myblog:index' %}"><i class="home"></i>主页</a></li>
                                         {% else %}
-                                        <li><a href="{% url 'myblog:index' %}" class="hvr-underline-from-left"><i class="home1"></i>Home</a></li>
+                                        <li><a href="{% url 'myblog:index' %}" class="hvr-underline-from-left"><i class="home1"></i>主页</a></li>
                                     {% endif %}
 
-									<li><a href="#" class="hvr-underline-from-left"><i class="picture1"></i>Photos</a></li>
+									<li><a href="#" class="hvr-underline-from-left"><i class="picture1"></i>美图鉴赏</a></li>
 
-                                    {% if page_table == 'blog' %}
-                                        <li class="active"><a href="{% url 'myblog:bloglist' %}"><i class="edit"></i>Blog</a></li>
+                                    {% if my_page == 'blog' %}
+                                        <li class="active"><a href="{% url 'myblog:bloglist' %}"><i class="edit"></i>文章列表</a></li>
                                     {% else %}
-                                        <li><a href="{% url 'myblog:bloglist' %}" class="hvr-underline-from-left"><i class="edit1"></i>Blog</a></li>
+                                        <li><a href="{% url 'myblog:bloglist' %}" class="hvr-underline-from-left"><i class="edit1"></i>文章列表</a></li>
                                     {% endif %}
                                     {% if user.is_authenticated %}
-									<li><a href="{% url 'logout' %}" class="hvr-underline-from-left"><i class="text-size1"></i>登出</a></li>
+									<li><a href="{% url 'users:index' %}" class="hvr-underline-from-left"><i class="text-size1"></i>个人信息管理</a></li>
                                     {% else %}
                                         <li><a href="{% url 'login' %}" class="hvr-underline-from-left"><i class="text-size1"></i>登录/注册</a></li>
                                     {% endif %}
-									<li><a href="#" class="hvr-underline-from-left"><i class="envelope1"></i>Mail US</a></li>
+									<li><a href="#" class="hvr-underline-from-left"><i class="envelope1"></i>联系我</a></li>
 								</ul>
 							</nav>
 						</div>

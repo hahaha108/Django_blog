@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+import logging
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import datetime
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -26,6 +30,70 @@ SECRET_KEY = 'e!w-ajuym(e-4$5x&ac6q0h&g16jeka6^tzrd4d0a%n4bf9jf@'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+#########################
+## Django Logging  BEGIN
+#########################
+#LOGGING_DIR 日志文件存放目录
+LOGGING_DIR = os.path.join(BASE_DIR,'logs')
+if not os.path.exists(LOGGING_DIR):
+    os.mkdir(LOGGING_DIR)
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '[%(levelname)s][%(asctime)s][%(filename)s][%(funcName)s][%(lineno)d]> %(message)s'
+        },
+        'simple': {
+            'format': '[%(levelname)s]> %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file_handler': {
+             'level': 'INFO',
+             'class': 'logging.FileHandler',
+             'filename': ('%s/django.admin.'% LOGGING_DIR)+datetime.date.today().strftime("%Y%m%d")+'.log',
+             'formatter':'standard'
+        }, # 用于文件输出
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+             'formatter':'standard'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console','file_handler'],
+            'level':'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    }
+}
+
+
+#########################
+## Django Logging  END
+#########################
 
 
 # Application definition
@@ -124,9 +192,15 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+# STATICFILES_FINDERS = (
+#   'django.contrib.staticfiles.finders.FileSystemFinder',
+#   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+# )
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
@@ -135,3 +209,4 @@ VERIFICATION_CODE_IMGS_DIR = os.path.join(os.path.join(BASE_DIR, 'static'),'veri
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

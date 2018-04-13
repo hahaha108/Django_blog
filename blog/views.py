@@ -11,8 +11,7 @@ import utils
 
 
 def index(request):
-    tpl_name = 'index.html'
-    return render(request,tpl_name,context={'page_table':'index'})
+    return render(request,'index.html', context={'my_page': 'index'})
 
 class detail(DetailView):
     model = Post
@@ -66,7 +65,7 @@ class blog(ListView):
         context.update(
             {
                 'page_range' : range(start,end + 1),
-                'page_table':'blog'
+                'my_page':'blog'
             }
         )
         return context
