@@ -9,6 +9,8 @@ import threading
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.core.cache import cache
+
+from blog.models import Post
 from . import verify_code
 from .forms import RegisterForm
 from django.urls import reverse
@@ -27,7 +29,6 @@ def register_user(request):
         os.makedirs(verify_code_img_path,exist_ok=True)
     random_filename = "".join(random.sample(string.ascii_lowercase,5))
     random_code = verify_code.gene_code(verify_code_img_path,random_filename)
-    print(verify_code_img_path)
     img_path = 'verify_code/'+ today_str + '/' + random_filename + '.png'
     # 验证码写入缓存字典中，并设置60秒过期时间
     cache.set(random_filename,random_code,60)
@@ -76,7 +77,7 @@ def pubilcation(request):
         if form.is_valid():
             logger.warning('表单提交成功')
             post = form.save(commit=False)
-            post.author = current_user
+            post.user = current_user
             post.save()
             form.save_m2m()
             return redirect(reverse('users:publication_done'))
@@ -85,3 +86,12 @@ def pubilcation(request):
 
 def pubication_done(request):
     return render(request,'user/pubication_done.html')
+
+def post_manage(request):
+    return render(request,'user/post_manage.html')
+
+def post_delete(request,post_pk):
+    pk = int(post_pk)
+    logger.warning(pk)
+    Post.objects.get(id = pk).delete()
+    return redirect(reverse('users:post_manage'))

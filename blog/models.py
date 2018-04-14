@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-import markdown
 from django.utils.html import strip_tags
 from ckeditor.fields import RichTextField
 
@@ -31,7 +30,7 @@ class Post(models.Model):
     excerpt = models.CharField(max_length=300,null=True,blank=True)
     category = models.ForeignKey('Category',None)
     tags = models.ManyToManyField('Tag')
-    author = models.ForeignKey(User,None)
+    user = models.ForeignKey(User, null=True,on_delete=models.SET_NULL)
     views = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -49,12 +48,5 @@ class Post(models.Model):
 
     def save(self,*args,**kwargs):
         if not self.excerpt:
-            mk = markdown.Markdown(
-                extensions=[
-                    'markdown.extensions.extra',
-                    'markdown.extensions.codehilite',
-                    'markdown.extensions.toc'
-                ]
-            )
-            self.excerpt = strip_tags(mk.convert(self.body))[:108]
+            self.excerpt = strip_tags(self.body)[:108]
         super(Post, self).save(*args,**kwargs)

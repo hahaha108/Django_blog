@@ -1,8 +1,7 @@
-import markdown
+
 from django.shortcuts import render
 from django.utils.text import slugify
 from django.views.generic import ListView,DetailView
-from markdown.extensions.toc import TocExtension
 
 from comments.forms import CommentForm
 from .models import Post
@@ -23,18 +22,6 @@ class detail(DetailView):
         self.object.increase_views()
         return response
 
-    def get_object(self, queryset=None):
-        # 调用父类的get_object去获取post对象
-        post = super().get_object(queryset=None)
-        # 将post的body使用markdown处理
-        md = markdown.Markdown(extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            TocExtension(slugify=slugify)
-        ])
-        post.body = md.convert(post.body)
-        # 返回post对象
-        return post
 
     def get_context_data(self, **kwargs):
         # 调用父类的get_context_data，获取原始的context对象
@@ -55,13 +42,13 @@ class blog(ListView):
     model = Post
     template_name = 'blog/blog.html'
     context_object_name = 'post_list'
-    paginate_by = 2
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(blog, self).get_context_data(**kwargs)
         paginator = context.get('paginator')
         page = context.get('page_obj')
-        start,end = utils.custompaginator(paginator.num_pages,page.number, 3)
+        start,end = utils.custompaginator(paginator.num_pages,page.number, 10)
         context.update(
             {
                 'page_range' : range(start,end + 1),
