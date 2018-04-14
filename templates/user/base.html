@@ -10,7 +10,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>用户信息管理</title>
+    {% block css %}
 
+    {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'ui/themes/default/easyui.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'ui/themes/icon.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'ui/demo/demo.css' %}">
@@ -60,27 +62,27 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="#"><i class="fa fa-tag" aria-hidden="true"></i> 模型管理<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-tag" aria-hidden="true"></i> 个人信息管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#"><i class="fa fa-list" aria-hidden="true"></i> 精选美文</a>
+                                <a href="{% url 'users:index' %}"><i class="fa fa-list" aria-hidden="true"></i> 我的信息</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-bolt" aria-hidden="true"></i> 数据管理</a>
+                                <a href="{% url 'password_change' %}"><i class="fa fa-bolt" aria-hidden="true"></i> 修改密码</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i> 数据统计<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i> 文章管理<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#"><i class="fa fa-filter" aria-hidden="true"></i> 柱状数据统计</a>
+                                <a href="{% url 'users:publication' %}"><i class="fa fa-filter" aria-hidden="true"></i> 发布新文章</a>
                             </li>
                              <li>
-                                <a href="#"><i class="fa fa-vimeo-square" aria-hidden="true"></i> 线状数据统计 </a>
+                                <a href="#"><i class="fa fa-vimeo-square" aria-hidden="true"></i> 修改文章</a>
                             </li>
                              <li>
-                                <a href="#"><i class="fa fa-filter" aria-hidden="true"></i> 文章管理 </a>
+                                <a href="#"><i class="fa fa-filter" aria-hidden="true"></i> 删除文章</a>
                             </li>
 
                         </ul>
@@ -89,7 +91,9 @@
             </div>
         </div>
     </nav>
+
     {% block content %}{% endblock %}
+
 </div>
 
 <script src="{%  static 'admin/bower_components/jquery/dist/jquery.min.js' %}"></script>

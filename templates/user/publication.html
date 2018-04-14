@@ -1,0 +1,35 @@
+{% extends 'user/base.html' %}
+
+{% block js %}
+<script type="text/javascript" src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+<script type="text/javascript" src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+    <div id="page-wrapper">
+        <form class="form" action="{% url 'users:publication' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for lable in form %}
+                <div>
+                {{ lable.label_tag }}
+                </div>
+                <div>
+                {{ lable }}
+                </div>
+                <div>
+                {{ lable.errors }}
+                </div>
+
+            {% endfor %}
+            <div>
+                <button style="margin-top: 20px;margin-left: 90px;width: 120px" type="submit" class="btn btn-primary">
+                    发表文章
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

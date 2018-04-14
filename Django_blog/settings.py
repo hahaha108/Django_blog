@@ -65,7 +65,7 @@ LOGGING = {
             'formatter': 'simple'
         },
         'file_handler': {
-             'level': 'INFO',
+             'level': 'WARNING',
              'class': 'logging.FileHandler',
              'filename': ('%s/django.admin.'% LOGGING_DIR)+datetime.date.today().strftime("%Y%m%d")+'.log',
              'formatter':'standard'
@@ -108,6 +108,8 @@ INSTALLED_APPS = [
     'blog',
     'user',
     'comments',
+    'ckeditor',
+    'ckeditor_uploader'
 ]
 
 MIDDLEWARE = [
@@ -209,4 +211,10 @@ VERIFICATION_CODE_IMGS_DIR = os.path.join(os.path.join(BASE_DIR, 'static'),'veri
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = "editor"
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+    },
+}

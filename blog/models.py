@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 import markdown
 from django.utils.html import strip_tags
+from ckeditor.fields import RichTextField
 
 from user.models import User
 
@@ -21,8 +22,8 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=60)
-    titleimg = models.ImageField(null=True,blank=True)
-    body = models.TextField()
+    titleimg = models.ImageField(upload_to='titleimg/%Y/%m/%d/',null=True,blank=True)
+    body = RichTextField()
 
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)

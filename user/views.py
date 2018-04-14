@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 import os
 import random
@@ -6,13 +7,16 @@ import string
 import threading
 
 from django.conf import settings
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.core.cache import cache
 from . import verify_code
 from .forms import RegisterForm
 from django.urls import reverse
-
+from .forms import PubilcationForm
+from .models import User
 # Create your views here.
+
+logger = logging.getLogger("django")
 
 def register_user(request):
     # 生成验证码
@@ -62,3 +66,22 @@ def register_user(request):
 
 def index(request):
     return render(request,'user/index.html')
+
+def pubilcation(request):
+    form = PubilcationForm()
+    if request.method == 'POST':
+        form = PubilcationForm(request.POST,request.FILES,)
+        logger.warning('POST请求成功')
+        current_user = request.user
+        if form.is_valid():
+            logger.warning('表单提交成功')
+            post = form.save(commit=False)
+            post.author = current_user
+            post.save()
+            form.save_m2m()
+            return redirect(reverse('users:publication_done'))
+
+    return render(request,'user/publication.html',{'form':form })
+
+def pubication_done(request):
+    return render(request,'user/pubication_done.html')
