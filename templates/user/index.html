@@ -7,9 +7,9 @@
                 <h3 class="page-header">个人信息</h3>
             </div>
         </div>
-        <img src="{{ user.icon.url }}" alt="">
-        <p>{{ user.nickname }}</p>
-        <p>{{ user.email }}</p>
+         <img style="height: 270px;width: 270px;border: black solid 3px" src="{{ user.icon.url }}" alt="">
+                        <p style="color: black;font-size: 22px;margin-top: 20px">昵称：<span>{{ user.nickname }}</span></p>
+                        <p style="color: black;font-size: 22px;margin-top: 20px">邮箱：<span style="font-size: 17px">{{ user.email }}</span></p>
         </div>
 
     </div>

@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User
 from django import forms
 from blog.models import Post
-from ckeditor.fields import RichTextFormField
+
 
 class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):

@@ -20,16 +20,16 @@ class Tag(models.Model):
         return self.name
 
 class Post(models.Model):
-    title = models.CharField(max_length=60)
-    titleimg = models.ImageField(upload_to='titleimg/%Y/%m/%d/',null=True,blank=True)
-    body = RichTextField()
+    title = models.CharField(max_length=60,verbose_name='文章标题')
+    titleimg = models.ImageField(upload_to='titleimg/%Y/%m/%d/',null=True,blank=True,verbose_name='标题图片')
+    body = RichTextField(verbose_name='正文内容')
 
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
 
     excerpt = models.CharField(max_length=300,null=True,blank=True)
-    category = models.ForeignKey('Category',None)
-    tags = models.ManyToManyField('Tag')
+    category = models.ForeignKey('Category',None,verbose_name='文章分类')
+    tags = models.ManyToManyField('Tag',verbose_name='文章标签')
     user = models.ForeignKey(User, null=True,on_delete=models.SET_NULL)
     views = models.PositiveIntegerField(default=0)
 
