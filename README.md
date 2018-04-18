@@ -17,26 +17,28 @@
 
 #### 主页面
 
-![python博客主页](.\show\python博客主页.png)
+![](https://i.imgur.com/z3fo4E9.png)
 
 
 
-#### 文章列表页面![python博客主页](.\show\python博客列表.png)
+#### 文章列表页面
+
+![](https://i.imgur.com/mqztgJl.png)
 
 
 
 #### 文章详情页面
 
-![python博客主页](.\show\python博客详情.png)
+![](https://i.imgur.com/vheoyNc.jpg)
 
 
 
 #### 文章发布页面
 
-![python博客主页](.\show\用户信息管理发布文章.png)
+![](https://i.imgur.com/yOxYUN4.png)
 
 
 
 #### 文章管理页面
 
-![python博客主页](.\show\用户信息管理管理文章.png)
+![](https://i.imgur.com/VqlWmib.png)
